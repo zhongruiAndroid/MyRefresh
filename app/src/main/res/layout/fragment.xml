@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+    android:background="@color/sadf"
+    >
+<in.srain.cube.views.ptr.PtrClassicFrameLayout
+    android:id="@+id/pcfl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:ptr_resistance="2.1"
+    app:ptr_ratio_of_header_height_to_refresh="1.2"
+    >
+    <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:background="#ffffff"
+            >
+            <com.youth.banner.Banner
+                android:id="@+id/bn_home"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:image_scale_type="fit_xy"
+                app:scroll_time="2000"
+                app:delay_time="5000"
+                app:indicator_drawable_selected="@color/colorPrimary"
+                app:indicator_drawable_unselected="@color/colorAccent"
+                >
+
+            </com.youth.banner.Banner>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="android"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                />
+        </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+</in.srain.cube.views.ptr.PtrClassicFrameLayout>
+</LinearLayout>
