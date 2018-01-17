@@ -52,9 +52,8 @@ public class PtrFrameLayout extends ViewGroup {
     // working parameters
     private ScrollChecker mScrollChecker;
     private int mPagingTouchSlop;
-    private int offsetXFlag=1;
-    private float scaledTouchSlopFlag=2;
-    private int horizontalMoveFlag=1;
+    private int XOffsetMultiple =1;
+    private int YOffsetMultiple =1;
     private int mHeaderHeight;
     private boolean mDisableWhenHorizontalMove = false;
     private int mFlag = 0x00;
@@ -117,23 +116,28 @@ public class PtrFrameLayout extends ViewGroup {
         final ViewConfiguration conf = ViewConfiguration.get(getContext());
         mPagingTouchSlop =  conf.getScaledTouchSlop() * 2;
     }
-
-    public void setOffsetXFlag(int offsetXFlag) {
-        this.offsetXFlag = offsetXFlag;
-    }
-
-    public void setScaledTouchSlopFlag(float scaledTouchSlopFlag) {
+    public void setScaledTouchMultiple(float scaledTouchMultiple) {
         final ViewConfiguration conf = ViewConfiguration.get(getContext());
-        mPagingTouchSlop = (int) (conf.getScaledTouchSlop() * scaledTouchSlopFlag);
+        mPagingTouchSlop = (int) (conf.getScaledTouchSlop() * scaledTouchMultiple);
     }
 
-    public void setHorizontalMoveFlag(int horizontalMoveFlag) {
-        this.horizontalMoveFlag = horizontalMoveFlag;
+    public void setXOffsetMultiple(int XOffsetMultiple) {
+        this.XOffsetMultiple = XOffsetMultiple;
     }
 
-    public boolean isHorizontalMove() {
+    public void setYOffsetMultiple(int YOffsetMultiple) {
+        this.YOffsetMultiple = YOffsetMultiple;
+    }
+
+    //是否在顶部没有下啦
+    public boolean isInTop(){
+        return mPtrIndicator.isInStartPosition();
+    }
+
+    public boolean getPreventForHorizontal() {
         return mPreventForHorizontal;
     }
+
     @Override
     protected void onFinishInflate() {
         final int childCount = getChildCount();
@@ -337,7 +341,7 @@ public class PtrFrameLayout extends ViewGroup {
                 mPtrIndicator.onMove(e.getX(), e.getY());
                 float offsetX = mPtrIndicator.getOffsetX();
                 float offsetY = mPtrIndicator.getOffsetY();
-                if (mDisableWhenHorizontalMove && !mPreventForHorizontal && (Math.abs(offsetX)*offsetXFlag > mPagingTouchSlop && horizontalMoveFlag*Math.abs(offsetX) > Math.abs(offsetY))) {
+                if (mDisableWhenHorizontalMove && !mPreventForHorizontal && (Math.abs(offsetX)* XOffsetMultiple > mPagingTouchSlop && YOffsetMultiple*Math.abs(offsetX) > Math.abs(offsetY))) {
                     if (mPtrIndicator.isInStartPosition()) {
                         mPreventForHorizontal = true;
                     }

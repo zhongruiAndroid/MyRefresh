@@ -1,10 +1,12 @@
 package com.github.myrefresh;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -16,45 +18,51 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * Created by Administrator on 2018/1/16.
+ */
+
+public class MyFragment extends Fragment implements Main2Activity.MyInter{
+
+    private String TAG=this.getClass().getSimpleName();
+
+    @Override
+    public boolean move(boolean isHorizontal) {
+        float y = pcfl.getScrollY();
+        boolean inStartPosition = pcfl.isInTop();
+        Log.i(TAG+"===",inStartPosition+"==="+isHorizontal);
+       /* if(isHorizontal){
+            pcfl.setEnabled(true);
+        }
+        if(inStartPosition){
+            pcfl.setEnabled(false);
+        }else{
+            pcfl.setEnabled(true);
+        }*/
+        return inStartPosition;
+    }
 
     PtrClassicFrameLayout pcfl;
     Banner bn_home;
+
     private List<String> bannerList;
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment,null);
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        pcfl = (PtrClassicFrameLayout) findViewById(R.id.pcfl);
-        pcfl.disableWhenHorizontalMove(true);
-        pcfl.setYOffsetMultiple(3);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        pcfl = view.findViewById(R.id.pcfl);
         pcfl.setXOffsetMultiple(3);
-        pcfl.setScaledTouchMultiple((float) 0.5);
-        pcfl.setPtrHandler(new PtrDefaultHandler() {
-            @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
-                pcfl.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        pcfl.refreshComplete();
-                    }
-                },1000);
-            }
-        });
-
-        findViewById(R.id.tv).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,Main2Activity.class));
-            }
-        });
-
-        pcfl = (PtrClassicFrameLayout) findViewById(R.id.pcfl);
-        bn_home = (Banner) findViewById(R.id.bn_home);
+        pcfl.setYOffsetMultiple(3);
+        pcfl.setScaledTouchMultiple(0.5f);
+        pcfl.disableWhenHorizontalMove(true);
+        bn_home = view.findViewById(R.id.bn_home);
         initView();
-
     }
+
     private void initView() {
         pcfl.setPtrHandler(new PtrDefaultHandler() {
             @Override
@@ -99,8 +107,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        return super.dispatchTouchEvent(ev);
-    }
 }
