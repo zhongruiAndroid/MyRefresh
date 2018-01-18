@@ -36,6 +36,11 @@
                 >
 
             </com.youth.banner.Banner>
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

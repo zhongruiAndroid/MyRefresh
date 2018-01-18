@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 
@@ -61,6 +63,9 @@ public class MyFragment extends Fragment implements Main2Activity.MyInter{
         pcfl.disableWhenHorizontalMove(true);
         bn_home = view.findViewById(R.id.bn_home);
         initView();
+        ImageView imageView = (ImageView) view.findViewById(R.id.iv);
+        Glide.with(this).load("http://storage.slide.news.sina.com.cn/slidenews/77_ori/2018_03/74766_810957_613903.gif").into(imageView);
+
     }
 
     private void initView() {

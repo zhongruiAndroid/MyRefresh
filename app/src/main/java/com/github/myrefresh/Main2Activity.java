@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -25,6 +28,8 @@ public class Main2Activity extends AppCompatActivity {
         myFragment = (MyFragment) getSupportFragmentManager().findFragmentById(R.id.ff);
         inter=myFragment;
         Log.i(TAG+"===","===2");
+
+
     }
 
     float downX,downY;

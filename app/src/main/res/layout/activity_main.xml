@@ -30,6 +30,14 @@
             >
 
         </com.youth.banner.Banner>
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/black_background"
+            android:background="@color/colorAccent"
+            />
         <TextView
             android:id="@+id/tv"
             android:layout_width="match_parent"
