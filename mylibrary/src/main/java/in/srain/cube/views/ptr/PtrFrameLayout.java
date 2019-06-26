@@ -210,7 +210,7 @@ public class PtrFrameLayout extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         if (isDebug()) {
             PtrCLog.d(LOG_TAG, "onMeasure frame: width: %s, height: %s, padding: %s %s %s %s",
@@ -237,6 +237,15 @@ public class PtrFrameLayout extends ViewGroup {
                         mPtrIndicator.getCurrentPosY(), mPtrIndicator.getLastPosY(), mContent.getTop());
             }
         }
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+
+        setMeasuredDimension(
+                widthMode==MeasureSpec.EXACTLY?widthSize:Math.min(widthSize,mContent.getMeasuredWidth()),
+                heightMode==MeasureSpec.EXACTLY?heightSize:Math.min(heightSize,mContent.getMeasuredHeight())
+        );
     }
 
     private void measureContentView(View child,
