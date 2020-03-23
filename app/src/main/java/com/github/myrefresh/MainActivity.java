@@ -62,23 +62,9 @@ public class MainActivity extends AppCompatActivity {
         initView();
 
         iv = (ImageView) findViewById(R.id.iv);
-        Glide.with(MainActivity.this).load("http://pic.qqtn.com/file/2013/2014-12/2014122616202514075.gif").listener(mRequestListener).diskCacheStrategy(DiskCacheStrategy.SOURCE).override(600, 200).into(iv);
+        Glide.with(MainActivity.this).load("http://pic.qqtn.com/file/2013/2014-12/2014122616202514075.gif").into(iv);
 
     }
-    RequestListener mRequestListener = new RequestListener() {
-        @Override
-        public boolean onException(Exception e, Object model, Target target, boolean isFirstResource) {
-            Log.d("TAG", "onException: " + e.toString()+"  model:"+model+" isFirstResource: "+isFirstResource);
-            iv.setImageResource(R.mipmap.ic_launcher);
-            return false;
-        }
-
-        @Override
-        public boolean onResourceReady(Object resource, Object model, Target target, boolean isFromMemoryCache, boolean isFirstResource) {
-            Log.e("TAG",  "model:"+model+" isFirstResource: "+isFirstResource);
-            return false;
-        }
-    };
     private void initView() {
         pcfl.setPtrHandler(new PtrDefaultHandler() {
             @Override
